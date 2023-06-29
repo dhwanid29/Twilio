@@ -1,4 +1,6 @@
 import json
+import os
+
 from django.shortcuts import render
 from twilio.rest import Client
 
@@ -23,8 +25,10 @@ def addtaxbracket(request):
 
 
 def send_message(request):
-    account_sid = 'AC8dfc5cb52d7168d8929f3bf7541eda58'
-    auth_token = '5349c87fd8de11397eb491c4c363d077'
+    account_sid = os.environ.get('ACCOUNT_SID')
+    auth_token = os.environ.get('AUTH_TOKEN')
+    # account_sid = 'AC8dfc5cb52d7168d8929f3bf7541eda58'
+    # auth_token = '5349c87fd8de11397eb491c4c363d077'
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
